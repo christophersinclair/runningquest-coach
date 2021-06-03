@@ -1,13 +1,12 @@
 package io.runningquest.coach.model;
 
-import org.hibernate.annotations.Columns;
-
 import javax.persistence.*;
 
 @Entity
 @Table(name = "User", schema = "runningquest")
 public class User {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
     private Long userID;
 
     @Column(name = "username")
@@ -16,6 +15,8 @@ public class User {
     private String password;
     @Column(name = "email")
     private String emailAddress;
+    @Column(name = "avatar_id")
+    private Long avatarID;
 
     public Long getUserID() {
         return userID;
@@ -47,5 +48,13 @@ public class User {
 
     public void setEmailAddress(String emailAddress) {
         this.emailAddress = emailAddress;
+    }
+
+    public Long getAvatarID() {
+        return avatarID;
+    }
+
+    public void setAvatarID(Long avatarID) {
+        this.avatarID = avatarID;
     }
 }

@@ -22,6 +22,10 @@ public class UserService implements IUserService {
     }
 
     private boolean emailExists(String email) {
-        return iUserRepository.findByEmail(email) != null;
+        User user = iUserRepository.findByEmail(email);
+        if (user == null) {
+            return false;
+        }
+        return true;
     }
 }

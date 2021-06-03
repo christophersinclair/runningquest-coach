@@ -9,12 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+@Controller
 public class UserController {
 
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
@@ -32,10 +34,10 @@ public class UserController {
 
             iUserService.registerNewUserAccount(user);
             logger.info("Registered user: " + user.getEmailAddress());
-            return ResponseEntity.status(HttpStatus.CREATED).build();
+            return new ResponseEntity<>("User " + user.getEmailAddress() + " registered.", HttpStatus.CREATED);
         } catch (UserAlreadyExistsException userAlreadyExistsException) {
             logger.error("User already exists: " + user.getEmailAddress());
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+            return new ResponseEntity<>("User with email address: " + user.getEmailAddress() + " already exists.", HttpStatus.UNPROCESSABLE_ENTITY);
         }
     }
 
