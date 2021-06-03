@@ -24,7 +24,7 @@ public class UserController {
     @Autowired
     private IUserService iUserService;
 
-    @PostMapping("/user/register")
+    @PostMapping("/api/user/register")
     public @ResponseBody ResponseEntity<String> registerUser(@RequestBody User user) {
         try {
             BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
