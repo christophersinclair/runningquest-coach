@@ -18,6 +18,10 @@ public class User {
     @Column(name = "avatar_id")
     private Long avatarID;
 
+    @ManyToOne
+    private Quest quest;
+
+
     public Long getUserID() {
         return userID;
     }
