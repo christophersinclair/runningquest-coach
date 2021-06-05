@@ -2,7 +2,7 @@ package io.runningquest.coach.controller;
 
 import io.runningquest.coach.exception.UserAlreadyExistsException;
 import io.runningquest.coach.model.User;
-import io.runningquest.coach.service.IUserService;
+import io.runningquest.coach.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +22,7 @@ public class UserController {
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @Autowired
-    private IUserService iUserService;
+    private UserService userService;
 
     @PostMapping("/api/user/register")
     public @ResponseBody ResponseEntity<String> registerUser(@RequestBody User user) {
@@ -32,7 +32,7 @@ public class UserController {
             user.setPassword(encodedPassword);
 
 
-            iUserService.registerNewUserAccount(user);
+            userService.registerNewUserAccount(user);
             logger.info("Registered user: " + user.getEmailAddress());
             return new ResponseEntity<>("User " + user.getEmailAddress() + " registered.", HttpStatus.CREATED);
         } catch (UserAlreadyExistsException userAlreadyExistsException) {

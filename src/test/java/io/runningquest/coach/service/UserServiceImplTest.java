@@ -1,26 +1,23 @@
 package io.runningquest.coach.service;
 
-import io.runningquest.coach.exception.UserAlreadyExistsException;
-import io.runningquest.coach.model.User;
-import io.runningquest.coach.repository.IUserRepository;
+import io.runningquest.coach.repository.UserRepository;
+import io.runningquest.coach.service.impl.UserServiceImpl;
 import org.junit.Before;
-import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.Assert.assertThrows;
-import static org.mockito.Mockito.when;
 import static org.junit.Assert.assertEquals;
 
-public class UserServiceTest {
+public class UserServiceImplTest {
 
     @Mock
-    private IUserRepository iUserRepository;
+    private UserRepository userRepository;
 
     @InjectMocks
-    private UserService userService;
+    private UserServiceImpl userServiceImpl;
 
     @Before
     public void initMocks() {

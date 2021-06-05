@@ -1,7 +1,7 @@
 package io.runningquest.coach.controller;
 
 import io.runningquest.coach.model.User;
-import io.runningquest.coach.service.IUserService;
+import io.runningquest.coach.service.UserService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,14 +10,13 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import static org.mockito.Mockito.when;
 import static org.junit.Assert.assertEquals;
 
 @RunWith(MockitoJUnitRunner.class)
 public class UserControllerTest {
 
     @Mock
-    IUserService iUserService;
+    UserService userService;
 
     @InjectMocks
     UserController userControllerTest;
