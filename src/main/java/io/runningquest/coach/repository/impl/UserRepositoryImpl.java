@@ -1,7 +1,8 @@
-package io.runningquest.coach.repository;
+package io.runningquest.coach.repository.impl;
 
 import io.runningquest.coach.exception.CoachException;
 import io.runningquest.coach.model.User;
+import io.runningquest.coach.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
