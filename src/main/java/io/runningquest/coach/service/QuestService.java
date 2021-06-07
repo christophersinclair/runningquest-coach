@@ -8,4 +8,6 @@ public interface QuestService {
 
     List<Quest> getForUser(Long userID);
 
+    void addForUser(Long userID, Long questID);
+
 }

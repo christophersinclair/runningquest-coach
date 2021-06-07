@@ -22,4 +22,9 @@ public class QuestServiceImpl implements QuestService {
     public List<Quest> getForUser(Long userID) {
         return questRepository.getQuestListForUserID(userID);
     }
+
+    @Override
+    public void addForUser(Long userID, Long questID) {
+        questRepository.addQuestForUserID(userID, questID);
+    }
 }

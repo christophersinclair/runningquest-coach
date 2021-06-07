@@ -9,10 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.MissingServletRequestParameterException;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +23,7 @@ public class QuestController {
     QuestService questService;
 
     @GetMapping("/api/quest/get-for-user")
-    public @ResponseBody ResponseEntity<List<Quest>> getQuestForUser(@RequestParam Long userID) {
+    public @ResponseBody ResponseEntity<List<Quest>> getQuestForUser(@RequestParam("userid") Long userID) {
         try {
             List<Quest> response = questService.getForUser(userID);
             if (response.isEmpty()) {
@@ -38,6 +35,18 @@ public class QuestController {
         } catch (Exception ex) {
             logger.error("Exception occurred while finding quests for user: " + userID);
             return new ResponseEntity<>(new ArrayList<>(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PostMapping("/api/quest/add-quest-for-user")
+    public @ResponseBody ResponseEntity<String> addQuestForUser(@RequestParam("userid") Long userID, @RequestParam("questid") Long questID) {
+        try {
+            questService.addForUser(userID, questID);
+            logger.info("Added quest " + questID + " for user " + userID);
+            return new ResponseEntity<>("Added quest " + questID + " for user " + userID, HttpStatus.OK);
+        } catch (Exception ex) {
+            logger.error("Exception occurred while adding quest " + questID + " for user " + userID);
+            return new ResponseEntity<>("Could not add quest " + questID + " for user " + userID, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 

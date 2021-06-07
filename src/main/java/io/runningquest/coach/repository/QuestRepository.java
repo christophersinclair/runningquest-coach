@@ -7,4 +7,6 @@ import java.util.List;
 public interface QuestRepository {
 
     List<Quest> getQuestListForUserID(Long userID);
+
+    void addQuestForUserID(Long userID, Long questID);
 }

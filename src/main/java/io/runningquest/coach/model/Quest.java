@@ -13,9 +13,6 @@ public class Quest {
     @Column(name = "goal")
     private String questGoal;
 
-    @ManyToOne
-    private Trial trial;
-
     public Long getQuestID() {
         return questID;
     }
@@ -32,11 +29,4 @@ public class Quest {
         this.questGoal = questGoal;
     }
 
-    public Trial getTrial() {
-        return trial;
-    }
-
-    public void setTrial(Trial trial) {
-        this.trial = trial;
-    }
 }
