@@ -10,8 +10,6 @@ public class Trial {
     @Column(name = "id")
     private Long trialID;
 
-    @Column(name = "sequence_number")
-    private int trialSequenceNumber;
     @Column(name = "goal")
     private String trialGoal;
 
@@ -23,13 +21,6 @@ public class Trial {
         this.trialID = trialID;
     }
 
-    public int getTrialSequenceNumber() {
-        return trialSequenceNumber;
-    }
-
-    public void setTrialSequenceNumber(int trialSequenceNumber) {
-        this.trialSequenceNumber = trialSequenceNumber;
-    }
 
     public String getTrialGoal() {
         return trialGoal;

@@ -18,10 +18,6 @@ public class User {
     @Column(name = "avatar_id")
     private Long avatarID;
 
-    @Column(name = "quest_id")
-    private Long questID;
-
-
     public Long getUserID() {
         return userID;
     }

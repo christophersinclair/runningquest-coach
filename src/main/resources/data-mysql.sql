@@ -1,31 +1,39 @@
 CREATE SCHEMA runningquest;
 USE runningquest;
 CREATE TABLE User (
-                      id INT NOT NULL AUTO_INCREMENT,
-                      username VARCHAR(100),
-                      password VARCHAR(100),
-                      email VARCHAR(100),
-                      avatar_id VARCHAR(100),
-                      quest_id INT REFERENCES Quest(id),
-                      PRIMARY KEY ( id )
+    id INT NOT NULL AUTO_INCREMENT,
+    username VARCHAR(100),
+    password VARCHAR(100),
+    email VARCHAR(100),
+    avatar_id VARCHAR(100),
+    PRIMARY KEY ( id )
 );
 CREATE TABLE Quest (
-                       id INT NOT NULL AUTO_INCREMENT,
-                       goal VARCHAR(100),
-                       PRIMARY KEY (id)
+    id INT NOT NULL AUTO_INCREMENT,
+    goal VARCHAR(100),
+    PRIMARY KEY (id)
 );
 CREATE TABLE Trial (
-                       id INT NOT NULL AUTO_INCREMENT,
-                       goal VARCHAR(100),
-                       PRIMARY KEY (id)
+    id INT NOT NULL AUTO_INCREMENT,
+    goal VARCHAR(100),
+    PRIMARY KEY (id)
 );
 CREATE TABLE QuestTrialRelation (
-                                    quest_id INT NOT NULL,
-                                    trial_id INT NOT NULL,
-                                    FOREIGN KEY (quest_id) REFERENCES Quest(id),
-                                    FOREIGN KEY (trial_id) REFERENCES Trial(id),
-                                    UNIQUE (quest_id, trial_id)
+    quest_id INT NOT NULL,
+    trial_id INT NOT NULL,
+    FOREIGN KEY (quest_id) REFERENCES Quest(id),
+    FOREIGN KEY (trial_id) REFERENCES Trial(id),
+    UNIQUE (quest_id, trial_id)
 );
+CREATE TABLE UserQuestRelation (
+    user_id INT NOT NULL,
+    quest_id INT NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES User(id),
+    FOREIGN KEY (quest_id) REFERENCES Quest(id),
+    UNIQUE (user_id, quest_id)
+);
+-- User table population (dummy data)
+INSERT INTO User (username, password, email, avatar_id) VALUES ("dummy", "realdumb", "dummy@runningquest.io", "1234");
 
 -- Trial table population
 INSERT INTO Trial (goal) VALUES ("Run/walk 1 mile");
@@ -110,3 +118,7 @@ INSERT INTO QuestTrialRelation (quest_id, trial_id) VALUES (4, 25);
 INSERT INTO QuestTrialRelation (quest_id, trial_id) VALUES (4, 26);
 INSERT INTO QuestTrialRelation (quest_id, trial_id) VALUES (4, 27);
 INSERT INTO QuestTrialRelation (quest_id, trial_id) VALUES (4, 28);
+
+-- UserQuestRelation table population
+INSERT INTO UserQuestRelation (user_id, quest_id) VALUES (1, 1);
+INSERT INTO UserQuestRelation (user_id, quest_id) VALUES (1, 2);
