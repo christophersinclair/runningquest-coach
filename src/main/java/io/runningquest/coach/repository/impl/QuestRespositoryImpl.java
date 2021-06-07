@@ -26,7 +26,7 @@ public class QuestRespositoryImpl implements QuestRepository {
     public List<Quest> getQuestListForUserID(Long userID) {
         List<Quest> result = new ArrayList<>();
         try {
-            Query q = entityManager.createNativeQuery("SELECT u.quest FROM User u WHERE u.user_id = :userID");
+            Query q = entityManager.createNativeQuery("SELECT uqr.quest_id FROM UserQuestRelation WHERE uqr.user_id = :userID");
             q.setParameter("userID", userID);
             result = q.getResultList();
         } catch (NoResultException ex) {
@@ -39,7 +39,7 @@ public class QuestRespositoryImpl implements QuestRepository {
     @Override
     public void addQuestForUserID(Long userID, Long questID) {
         try {
-            Query q = entityManager.createQuery("UPDATE User u SET u.questID = :questID WHERE u.userID = :userID");
+            Query q = entityManager.createNativeQuery("INSERT INTO UserQuestRelation (user_id, quest_id) VALUES (:userID, :questID)");
             q.setParameter("questID", questID);
             q.setParameter("userID", userID);
             int response = q.executeUpdate();

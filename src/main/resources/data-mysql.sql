@@ -1,5 +1,14 @@
 CREATE SCHEMA runningquest;
 USE runningquest;
+
+-- Clean up before initialization
+DROP TABLE User;
+DROP TABLE Quest;
+DROP TABLE Trial;
+DROP TABLE QuestTrialRelation;
+DROP TABLE UserQuestRelation;
+
+-- Create tables
 CREATE TABLE User (
     id INT NOT NULL AUTO_INCREMENT,
     username VARCHAR(100),
@@ -32,6 +41,7 @@ CREATE TABLE UserQuestRelation (
     FOREIGN KEY (quest_id) REFERENCES Quest(id),
     UNIQUE (user_id, quest_id)
 );
+
 -- User table population (dummy data)
 INSERT INTO User (username, password, email, avatar_id) VALUES ("dummy", "realdumb", "dummy@runningquest.io", "1234");
 
