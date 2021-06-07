@@ -26,7 +26,7 @@ public class QuestRespositoryImpl implements QuestRepository {
     public List<Quest> getQuestListForUserID(Long userID) {
         List<Quest> result = new ArrayList<>();
         try {
-            Query q = entityManager.createNativeQuery("SELECT uqr.quest_id FROM UserQuestRelation WHERE uqr.user_id = :userID");
+            Query q = entityManager.createNativeQuery("SELECT uqr.quest_id FROM UserQuestRelation uqr WHERE uqr.user_id = :userID");
             q.setParameter("userID", userID);
             result = q.getResultList();
         } catch (NoResultException ex) {
