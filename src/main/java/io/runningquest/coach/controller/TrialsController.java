@@ -26,7 +26,7 @@ public class TrialsController {
     private TrialService trialService;
 
     @GetMapping("/api/trial/get-for-quest")
-    public @ResponseBody ResponseEntity<List<Trial>> getTrialsForQuest(@RequestParam Long questID) {
+    public @ResponseBody ResponseEntity<List<Trial>> getTrialsForQuest(@RequestParam("questid") Long questID) {
         try {
             List<Trial> response = trialService.getForQuest(questID);
             if(response.isEmpty()) {

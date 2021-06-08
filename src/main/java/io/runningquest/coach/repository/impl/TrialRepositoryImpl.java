@@ -27,7 +27,7 @@ public class TrialRepositoryImpl implements TrialRepository {
     public List<Trial> getTrialListForQuestID(Long questID) {
         List<Trial> result = new ArrayList<>();
         try {
-            Query q = entityManager.createNativeQuery("SELECT qtr.trial_id FROM QuestTrialRelation qtr WHERE qtr.quest_id = :questID");
+            Query q = entityManager.createNativeQuery("SELECT * FROM Trial WHERE id IN (SELECT qtr.trial_id FROM QuestTrialRelation qtr WHERE qtr.quest_id = :questID)");
             q.setParameter("questID", questID);
             result = q.getResultList();
         } catch (NoResultException ex) {
